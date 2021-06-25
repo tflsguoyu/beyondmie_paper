@@ -1,0 +1,105 @@
+\subsection{Single/multiple spherical particle scattering \gy{similar to sec \ref{subsec:crosssection}}}
+
+$\lambda$: wavelength of light \\
+$\eta_m=1$: refractive index of medium \\
+$\eta_p$: refractive index of particle \\
+$r$: radius of particle \\
+$k=2\pi\eta_m/\lambda=2\pi/\lambda$: wave number \\ 
+
+We need two scattering amplitude functions in perpendicular and parallel polarizations:
+$S_1(\theta, \varphi)$ and $S_2(\theta, \varphi)$,
+where $\theta$ is the polarize angle and $\varphi$ is azimuth angle.
+For single particle, $S_1$ and $S_2$ are invariant with respect to $\varphi$.
+For multiple particles, after averaging a certain number of random distributions, we can also remove $\varphi$ from them. Now we have $S_1(\theta)$ and $S_2(\theta)$.
+
+
+We can write the important properties of the particles.
+
+\textbf{Extinction cross section}:
+$$C_t = 4\pi\mathbb{R}\left\{\frac{S(0)}{|k|^2}\right\}$$
+with $S(0)=S_1(0)=S_2(0)$.
+
+\textbf{Scattering cross section}:
+$$C_s = \int_0^{2\pi}\int_0^\pi \frac{|S_1(\theta)|^2+|S_2(\theta)|^2}{2|k|^2} \sin\theta\mathrm{d}\theta\mathrm{d}\phi$$
+
+\textbf{Absorption cross section}:
+$$C_a = C_t - C_s$$
+
+\textbf{Phase function}:
+$$f_p(\theta) = \frac{|S_1(\theta)|^2+|S_2(\theta)|^2}{2|k|^2C_s}$$
+
+\subsection{CELES vs. MiePlot\gy{This section is unnecessary?}}
+\textbf{Definition of some variables}:
+
+\textit{Phase function} $\mathbf{f_p}$ ($\mathbf{f_p}$:unpolarized, $\mathbf{f_{p\perp}}$:perpendicular, $\mathbf{f_{p\parallel}}$:parallel), \textit{scattering cross section} $\mathbf{C_s}$ and \textit{extinction cross section} $\mathbf{C_t}$ are from MiePlot. We treat them as groundtruth.
+
+$\mathbf{T_\perp^E}$ and $\mathbf{T_\parallel^E}$ are the perpendicular and parallel polarized outputs of CELES simulation with an incoming TE-polarized beam.
+
+$\mathbf{T_\perp^M}$ and $\mathbf{T_\parallel^M}$ are the perpendicular and parallel polarized outputs of CELES simulation with an incoming TM-polarized beam.
+
+$\mathbf{T_\perp^E(\theta, \varphi)}$, $\mathbf{T_\parallel^E(\theta, \varphi)}$, $\mathbf{T_\perp^M(\theta, \varphi)}$ and $\mathbf{T_\parallel^M(\theta, \varphi)}$ are 2D matrix with complex numbers. One dimension is polarize angle ($\theta$) and the other one is azimuth angle ($\varphi$).
+
+How to match MiePlot results by using CELES outputs?
+
+\subsubsection{Method 1}
+
+$$T_\perp(\theta, \varphi)^2 = |T_\perp^E(\theta, \varphi)|^2 + |T_\perp^M(\theta, \varphi)|^2 \eqno{[\mathbb{R}]}$$ 
+
+$$T_\parallel(\theta, \varphi)^2 = |T_\parallel^E(\theta, \varphi)|^2 + |T_\parallel^M(\theta, \varphi)|^2 \eqno{[\mathbb{R}]}$$
+
+For single particle, $T_\perp(\theta, \varphi)^2$ and $T_\parallel(\theta, \varphi)^2$ are symmetric in azimuth angle, so $\varphi$ could be omitted.
+$$T_\perp(\theta)^2 = T_\perp(\theta, \varphi)^2, \quad T_\parallel(\theta)^2 = T_\parallel(\theta, \varphi)^2 \eqno{[\mathbb{R}]}$$
+
+$$T(\theta)^2 = \frac{T_\perp(\theta)^2 + T_\parallel(\theta)^2}{2} \eqno{[\mathbb{R}]}$$
+
+We can match MiePlot \textit{phase function} by compute
+$$T(\theta)^2 * const_A \eqno{\mathbf{[=f_p(\theta)]}}$$
+$$T_\perp(\theta)^2 * const_A \eqno{\mathbf{[=f_{p\perp}(\theta)]}}$$
+$$T_\parallel(\theta)^2 * const_A \eqno{\mathbf{[=f_{p\parallel}(\theta)]}}$$
+
+We can match MiePlot \textit{scattering cross section} by compute
+$$\frac{2\pi}{|k|^2}\sum_{\theta=0}^\pi(T(\theta)^2\sin\theta\Delta\theta) * const_B \eqno{\mathbf{[=C_s]}}$$
+
+We can match MiePlot \textit{extinction cross section} by compute
+$$\frac{4\pi}{|k|^2}|\mathbb{R}\left\{T(\theta)\right\}|*const_C \eqno{\mathbf{[=C_t]}}$$
+see next section to get $T(\theta)$.
+
+\subsubsection{Method 2}
+
+$$T_\perp(\theta, \varphi) = \frac{T_\perp^E(\theta, \varphi) + T_\perp^M(\theta, \varphi)}{2} \eqno{[\mathbb{C}]}$$
+
+$$T_\parallel(\theta, \varphi) = \frac{T_\parallel^E(\theta, \varphi) + T_\parallel^M(\theta, \varphi)}{2} \eqno{[\mathbb{C}]}$$
+
+Different from Method 1, $T_\perp(\theta, \varphi)$ and $T_\parallel(\theta, \varphi)$ here are \textbf{NOT} symmetric in azimuth angle. To remove $\varphi$, we can simply average them through all the azimuth angles. Then we have,
+
+$$T_\perp(\theta) = \overline{T_\perp(\theta, \varphi)}|_\varphi, \quad T_\parallel(\theta) = \overline{T_\parallel(\theta, \varphi)}|_\varphi \eqno{[\mathbb{C}]}$$
+
+$$T_\perp(\theta)^2 = |T_\perp(\theta)|^2, \quad T_\parallel(\theta)^2 = |T_\parallel(\theta)|^2 \eqno{[\mathbb{R}]}$$
+
+$$T(\theta)^2 = \frac{T_\perp(\theta)^2+T_\parallel(\theta)^2}{2} \eqno{[\mathbb{R}]}$$
+
+We can match MiePlot \textit{phase function} by compute
+$$T(\theta)^2 * const_D \eqno{\mathbf{[=f_p(\theta)]}}$$
+$$T_\perp(\theta)^2 * const_D \eqno{\mathbf{[=f_{p\perp}(\theta)]}}$$
+$$T_\parallel(\theta)^2 * const_D \eqno{\mathbf{[=f_{p\parallel}(\theta)]}}$$
+
+We can match MiePlot \textit{scattering cross section} by compute
+$$\frac{2\pi}{|k|^2}\sum_{\theta=0}^\pi(T(\theta)^2\sin\theta\Delta\theta) * const_E \eqno{\mathbf{[=C_s]}}$$
+
+We can match MiePlot \textit{extinction cross section} by compute\footnote{The real part of $T(\theta)$ is negative in my tests, so I am using absolute value here.}
+$$\frac{4\pi}{|k|^2}|\mathbb{R}\left\{T(\theta)\right\}|*const_F \eqno{\mathbf{[=C_t]}}$$ 
+in which,
+$$T(\theta) = T_\perp(\theta) = \overline{T_\perp(\theta, \varphi)}|_\varphi \eqno{[\mathbb{C}]}$$
+or even,
+$$T(\theta) = T_\perp^E(\theta) = \overline{T_\perp^E(\theta, \varphi)}|_\varphi \eqno{[\mathbb{C}]}$$
+
+
+\subsection{Clusters of particles}
+
+For a given medium, we assume the particle density is $\rho_p$. If considering $n$ particles as a cluster ("super" particle), the new cluster density $\rho_c = \rho_p/n$. The extinction coefficient $$\sigma_t = \frac{\rho_p}{n} C_t$$, and scattering coefficient $$\sigma_s = \frac{\rho_p}{n} C_s$$.
+
+For the special case $n=1$, which considering all the particles independent with each other, it is matching the Mie theory. 
+
+For different $n$, the medium has the same $\sigma_t$ and $\sigma_s$, but with different phase function. (Figure)
+
+

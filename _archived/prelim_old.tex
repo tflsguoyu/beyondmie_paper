@@ -1,0 +1,231 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Basic operator notation}
+
+The differential operator given in Cartesian coordinates $\{x,y,z\}$: $$\nabla = \frac{\partial}{\partial x}\mathbf{i} + \frac{\partial}{\partial y}\mathbf{j} + \frac{\partial}{\partial z}\mathbf{k}$$
+
+For a scalar function $f(x,y,z)$ and a vector field $\mathbf{F}(x,y,z) = f_1(x,y,z)\mathbf{i} + f_2(x,y,z)\mathbf{j} + f_3(x,y,z)\mathbf{k}$, we have,
+
+Gradient: $$\nabla f = \frac{\partial f}{\partial x}\mathbf{i} + \frac{\partial f}{\partial y}\mathbf{j} + \frac{\partial f}{\partial z}\mathbf{k}$$
+
+Divergence: $$\nabla\cdot\mathbf{F} = \frac{\partial f_1}{\partial x} + \frac{\partial f_2}{\partial y} + \frac{\partial f_3}{\partial z}$$
+
+Curl: $$\nabla\times\mathbf{F} = \left|
+    \begin{array}{ccc}
+      \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+      \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+      f_1 & f_2 & f_3
+    \end{array}
+  \right|$$
+
+Laplace operator: $\nabla^2 f = \nabla\cdot(\nabla f)$
+
+Curl of Curl: 
+\begin{equation}
+    \nabla\times(\nabla\times\mathbf{F}) = \nabla(\nabla\cdot\mathbf{F}) - \nabla\cdot(\nabla\mathbf{F}) = - \nabla\cdot(\nabla\mathbf{F}) = -\nabla^2\mathbf{F} \label{CurlOfCurl}
+\end{equation}
+
+
+\subsection{The Maxwell equations}
+
+$\mathbf{E} [V/m]$: Electric field \\
+$\mathbf{H} [A/m]$: Magnetic field \\
+$\mathbf{D} [C/m^2]$: Electric flux density (Electric displacement) \\
+$\mathbf{B} [Wb/m^2(T)]$: Magnetic flux density (Magnetic induction) \\
+$\mathbf{J} [A/m^2]$: Electric current density \\
+$\mathbf{M}$: Magnetic current density (magnetization)\\
+$\mathbf{P}$: Electric polarization \\
+$\rho [C/m^3]$: Electric charge density \\
+$q$: Magnetic charge density \\
+$\varepsilon_0 [=8.854187817\times10^{-12}F/m]$: Electric permittivity of free space \\
+$\mu_0 [=4\pi\times10^{-7}H/m]$: Magnetic permeability of free space \\
+
+In book \textit{Absorption and Scattering of Light by Small Particle}:
+\begin{align}
+    \nabla\cdot\mathbf{D}  &= \rho \\
+    \nabla\times\mathbf{E} &= -\frac{\partial\mathbf{B}}{\partial t} \\
+    \nabla\cdot\mathbf{B}  &= 0 \\
+    \nabla\times\mathbf{H} &= \mathbf{J} + \frac{\partial\mathbf{D}}{\partial t}
+\end{align}
+where,
+\begin{align}
+    \mathbf{D} &= \varepsilon_0\mathbf{E} + \mathbf{P} \\
+    \mathbf{H} &= \frac{\mathbf{B}}{\mu_0} - \mathbf{M}
+\end{align}
+
+In free space, the polarization ($\mathbf{P}$) and magnetization ($\mathbf{M}$) vanish identically. And if there is no Electric charge density ($\rho [C/m^3]$) and Electric current density ($\mathbf{J}$), we rewrite \textit{Maxwell equation} in the form of $\mathbf{E}$ and $\mathbf{H}$,
+\begin{align}
+    \nabla\cdot\mathbf{E}  &= 0 \\
+    \nabla\times\mathbf{E} &= -\mu_0\frac{\partial\mathbf{H}}{\partial t} \\
+    \nabla\cdot\mathbf{H}  &= 0 \\
+    \nabla\times\mathbf{H} &= \varepsilon_0\frac{\partial\mathbf{E}}{\partial t}
+\end{align}
+
+To consider Electric and Magnetic field as as time-harmonic (time variation is sinusoidal) fields with angular frequency of $\omega$, which has the form of $\mathbf{\hat{u}} = \mathbf{u}e^{-i\omega t}$, the \textit{Maxwell equation} become,
+\begin{align}
+    \nabla\cdot\mathbf{E}  &= 0 \\
+    \nabla\times\mathbf{E} &= i\omega\mu_0\mathbf{H} \label{nablaE}\\
+    \nabla\cdot\mathbf{H}  &= 0 \\
+    \nabla\times\mathbf{H} &= -i\omega\varepsilon_0\mathbf{E} \label{nablaH}
+\end{align}
+
+Take the curl of (\ref{nablaE}) and (\ref{nablaH}), 
+\begin{align}
+    \nabla\times(\nabla\times\mathbf{E}) &= i\omega\mu_0(\nabla\times\mathbf{H}) = \omega^2\mu_0\varepsilon_0\mathbf{E} \\
+    \nabla\times(\nabla\times\mathbf{H}) &= -i\omega\varepsilon_0(\nabla\times\mathbf{E}) = \omega^2\mu_0\varepsilon_0\mathbf{H}
+\end{align}
+
+If we use (\ref{CurlOfCurl}), the \textit{Maxwell equations} reduce to the Helmholtz equations,
+\begin{align}
+    \nabla^2\mathbf{E} + k^2\mathbf{E} = 0 \\
+    \nabla^2\mathbf{H} + k^2\mathbf{H} = 0
+\end{align}
+where $k = \omega/c$, and $c=\frac{1}{\sqrt{\mu_0\varepsilon_0}}$ is the light speed in vacuum. 
+
+
+\subsection{Poynting vector and scattering matrix}
+\label{subsec:}
+In participating media, we use radiative transfer equation to model light propagation.
+\begin{equation}
+    (\mathbf{\omega}\cdot\nabla)L(\mathbf{x},\mathbf{\omega}) = 
+    -\sigma_t L(\mathbf{x},\mathbf{\omega}) + \sigma_s \int_{\Omega}p(\mathbf{\omega}', \mathbf{\omega})
+    L(\mathbf{x},\mathbf{\omega}')d\mathbf{\omega}'
+\end{equation}
+
+The radiative transport equation provides a macroscopic view of scattering and absorption within a participating medium, and the only required parameters are $\sigma_t$, $\sigma_s$, and $p$.
+
+Given a particle of specified size, shape and optical properties that is illuminated by an arbitrarily polarized monochromatic wave, determine the electromagnetic field at all points in the particle and at all points of the homogeneous medium in which the particle is embedded.Regardless of the illumination we can obtain the solution to the scattering-absorption problem by superposition.
+
+The field inside the particle is denoted by $(\mathbf{E}_1, \mathbf{H}_1)$; the field $(\mathbf{E}_2, \mathbf{H}_2)$ in the medium surrounding the particle is the superposition of the incident field
+$(\mathbf{E}_i, \mathbf{H}_i)$ and the scattered field $(\mathbf{E}_s, \mathbf{H}_s)$.
+\begin{align}
+    \mathbf{E}_2 &= \mathbf{E}_i + \mathbf{E}_s \\
+    \mathbf{H}_2 &= \mathbf{H}_i + \mathbf{H}_s 
+\end{align}
+
+For points $\mathbf{x}$ on the boundary $S$, we have,
+\begin{align}
+    [\mathbf{E}_2(\mathbf{x}) - \mathbf{E}_1(\mathbf{x})] \times \mathbf{n} &= 0 \\
+    [\mathbf{H}_2(\mathbf{x}) - \mathbf{H}_1(\mathbf{x})] \times \mathbf{n} &= 0 
+\end{align}
+
+[TODO: Scattering Matrix] 
+we are usually interested only in the Poynting vector at points outside the particle. The time-averaged Poynting vector $\mathbf{S}$ at any point in the medium surrounding the particle can be written as the sum of three terms,
+\begin{align}
+    \mathbf{S} &= \frac{1}{2}\mathbb{R}\left\{\mathbf{E}_2\times\mathbf{H}^\star_2\right\} = \mathbf{S}_i + \mathbf{S}_s + \mathbf{S}_{ext} \\
+    \mathbf{S}_i &= \frac{1}{2}\mathbb{R}\left\{\mathbf{E}_i\times\mathbf{H}^\star_i\right\} \\ 
+    \mathbf{S}_s &= \frac{1}{2}\mathbb{R}\left\{\mathbf{E}_s\times\mathbf{H}^\star_s\right\} \\ 
+    \mathbf{S}_{ext} &= \frac{1}{2}\mathbb{R}\left\{\mathbf{E}_i\times\mathbf{H}^\star_s + \mathbf{E}_s\times\mathbf{H}^\star_i \right\} \\ 
+\end{align}
+
+    $$[Amplitude scattering matrix: S]$$
+
+\subsection{Extinction, scattering, and absorption}
+\label{subsec:crosssection}
+Let us now consider extinction by a single arbitrary particle embedded in a nonabsorbing medium (not necessarily a vacuum) and illuminated by a plane wave. We construct an imaginary sphere of radius $r$ around the particle; the cross section at which electromagnetic energy crosses the surface $A$ of
+this sphere is 
+\begin{equation}
+    C_a = C_{ext} - C_s
+\end{equation}
+
+If the incident light is x-polarized, we use the symbol $\mathbf{X}$ for the vector scattering amplitude, which is related to the amplitude scattering matrix elements $S_j$ as follows:
+\begin{equation}
+    \mathbf{X} = (S_2\cos\phi + S_3\sin\phi)\mathbf{e}_{\parallel} + (S_4\cos\phi + S_1\sin\phi)\mathbf{e}_{\perp}
+\end{equation}
+
+\begin{align}
+    C_{ext} = \frac{4\pi}{k^2}\mathbb{R}\left\{(\mathbf{X}\cdot\mathbf{e}_x)_{\theta=0}\right\} \\
+    C_s = \int_0^{2\pi}\int_0^{\pi}\frac{|\mathbf{X}|^2}{k^2}\sin\theta d\theta d\phi
+\end{align}
+
+and phase function 
+\begin{equation}
+    p = \frac{|\mathbf{X}|^2}{k^2}C_s
+\end{equation}
+
+which is normalized by $$\int_{4\pi}p\;d\Omega=1$$.
+
+
+% the net rate at which electromagnetic energy crosses the surface $A$ of
+% this sphere is $W_a = W_i - W_s + W_{ext}$, where
+% \begin{align}
+%     W_a &= -\int_A \mathbf{S}\cdot \mathbf{e}_r dA \\
+%     W_i &= -\int_A \mathbf{S}_i\cdot \mathbf{e}_r dA \\
+%     W_s &= \int_A \mathbf{S}_s\cdot \mathbf{e}_r dA \\
+%     W_{ext} &= -\int_A \mathbf{S}_{ext}\cdot \mathbf{e}_r dA 
+% \end{align}
+
+% $W_i$ vanishes identically for a nonabsorbing medium; $W_s$ is the rate at which energy is scattered across the surface A. Therefore, $W_{ext}$ is just the sum of the energy absorption rate and the energy scattering rate:
+% \begin{equation}
+%     W_{ext} = W_a + W_s \label{ext-coef}
+% \end{equation}
+
+% It follows from (\ref{ext-coef}) that the extinction cross section $C_{ext}$ may be written as the
+% sum of the absorption cross section $C_a$ and the scattering cross section $C_s$:
+
+
+[TODO: unpolarized light]
+
+% In paper \textit{A Wave Optics Based Fiber Scattering Model}:
+% \begin{align}
+%     \nabla\cdot\mathbf{D}  &= \rho \\
+%     \nabla\times\mathbf{E} &= -\mathbf{M}-\mu_0\frac{\partial\mathbf{H}}{\partial t} \\
+%     \nabla\cdot\mathbf{B}  &= q \\
+%     \nabla\times\mathbf{H} &= \mathbf{J} + \varepsilon_0\frac{\partial\mathbf{E}}{\partial t}
+% \end{align}
+% where,
+% \begin{align}
+%     \mathbf{D} &= \varepsilon_0\mathbf{E} \\
+%     \mathbf{B} &= \mu_0\mathbf{H}
+% \end{align}
+
+% In other reference:
+% \begin{align}
+%     \nabla\cdot\mathbf{E}  &= \frac{\rho}{\varepsilon_0} \\
+%     \nabla\times\mathbf{E} &= -\frac{\partial\mathbf{B}}{\partial t} \\
+%     \nabla\cdot\mathbf{B}  &= 0 \\
+%     \nabla\times\mathbf{B} &= \mu_0\mathbf{J} + \mu_0\varepsilon_0\frac{\partial\mathbf{E}}{\partial t}
+% \end{align}
+
+% In free space, if there is no Electric charge density and Electric current density, we rewrite Maxwell equation with $\mathbf{E}$ and $\mathbf{H}$,
+% \begin{align}
+%     \nabla\cdot\mathbf{E}  &= 0 \\
+%     \nabla\times\mathbf{E} &= -\mu_0\frac{\partial\mathbf{H}}{\partial t} \label{nablaE} \\ 
+%     \nabla\cdot\mathbf{H}  &= 0 \\
+%     \nabla\times\mathbf{H} &=  \varepsilon_0\frac{\partial\mathbf{E}}{\partial t} \label{nablaH}
+% \end{align}
+
+% Take the curl of (\ref{nablaE}) and (\ref{nablaH}), we can get,
+% \begin{align}
+%     \nabla^2\mathbf{E} - \frac{1}{c^2}\frac{\partial^2\mathbf{E}}{\partial t^2} &= 0 \\
+%     \nabla^2\mathbf{H} - \frac{1}{c^2}\frac{\partial^2\mathbf{H}}{\partial t^2} &= 0
+% \end{align}
+% where $c=\frac{1}{\sqrt{\mu_0\varepsilon_0}}$ is the light speed in vacuum. 
+
+% Both $\mathbf{E}$ and $\mathbf{H}$ satisfy vector wave equation
+% \begin{equation}
+%     \nabla^2\mathbf{\hat{u}} - \frac{1}{c^2}\frac{\partial^2\mathbf{\hat{u}}}{\partial t^2} = 0
+% \end{equation}
+
+% To consider $\mathbf{u}$ as a time-harmonic (time variation is sinusoidal) field, $\mathbf{\hat{u}} = \mathbf{u}e^{i\omega t}$, Maxwell's equations reduce to the Helmholtz equations,
+
+% \begin{equation}
+%     \nabla^2\mathbf{u} + k^2\mathbf{u} = 0
+% \end{equation}
+% where $k = \omega/c$.
+
+\subsection{Mie theory for single sphere particle}
+For light scattering of an electromagnetic wave from a homogeneous spherical particle, exact solutions of the two scattering amplitude functions are given by Lorenz-Mie theory.
+
+\begin{align}
+    C_{ext} &= \frac{2\pi}{k^2}\sum_{n=1}^{\infty}(2n+1)\mathbb{R}\left\{a_n+b_n\right\} \\
+    C_s &= \frac{2\pi}{k^2}\sum_{n=1}^{\infty}(2n+1)(|a_n|^2+|b_n|^2)
+\end{align}
+    
+
+\subsection{T-Matrix for multiple sphere particles}
+Machowski came up with an efficient numerical method for T matrix computing, which can obtain total cross sections for cluster of spheres. The scattered field from the cluster as a whole is resolved into partial field scattered from each of the N spheres in the cluster,
+\begin{align}
+    C_{ext} &= \frac{2\pi}{k^2}\mathbb{R}\left\{\sum_{n,m,p}T_{mnp\;nmp}\right\} \\
+    C_s = &= \frac{2\pi}{k^2}\sum_{n,m,p}\sum_{k,l,p}\frac{n(n+1)(2l+1)f_{mn}}{l(l+1)(2n+1)f_{kl}}|T_{mnp\;klq}|^2
+\end{align}
+
