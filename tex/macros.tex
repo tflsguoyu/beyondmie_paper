@@ -1,0 +1,179 @@
+\newlength{\resLen}
+\newlength{\resLenTwo}
+\newlength{\raiseLen}
+
+%%%%%%%%%%%%%%%%%%%%
+% Marcos for other symbols
+%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\to}{\shortrightarrow}
+
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\eqdef}{=\vcentcolon}
+%
+% \stackMath
+% \newcommand\reallywidehat[1]{%
+% \savestack{\tmpbox}{\stretchto{%
+%   \scaleto{%
+%     \scalerel*[\widthof{\ensuremath{#1}}]{\kern-.6pt\bigwedge\kern-.6pt}%
+%     {\rule[-\textheight/2]{1ex}{\textheight}}%WIDTH-LIMITED BIG WEDGE
+%   }{\textheight}% 
+% }{0.5ex}}%
+% \stackon[1pt]{#1}{\tmpbox}%
+% }
+\makeatletter
+\newcommand{\dotr}[1]{%
+	\mathpalette\@dotr{#1}%
+}
+\newcommand*{\@dotr}[2]{%
+	% #1: math style (\displaystyle, ..., \scriptscriptstyle)
+	% #2: argument of \dotr
+	\sbox0{$\m@th#1#2$}%
+	\usebox{0}%
+	% simulating a superscript
+	\raisebox{\dimexpr\ht0-\height}{$\m@th#1\@smallbullet#1\bullet$}%
+	\kern\scriptspace
+}
+\newcommand*{\@smallbullet}[2]{%
+	\scalebox{.4}{$\m@th#1#2$}%
+}
+\makeatother
+
+\newcommand{\bd}{\boldsymbol{d}}
+\newcommand{\bu}{\boldsymbol{u}}
+\newcommand{\bx}{\boldsymbol{x}}
+\newcommand{\by}{\boldsymbol{y}}
+\newcommand{\bz}{\boldsymbol{z}}
+\newcommand{\bn}{\boldsymbol{n}}
+\newcommand{\bp}{\boldsymbol{p}}
+\newcommand{\bq}{\boldsymbol{q}}
+\newcommand{\be}{\boldsymbol{e}}
+\newcommand{\bv}{\boldsymbol{v}}
+\newcommand{\bI}{\boldsymbol{I}}
+\newcommand{\bom}{\boldsymbol{\omega}}
+
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\Sph}{\bbS^2}
+\newcommand{\vis}{\mathbb{V}}
+\newcommand{\bbP}{\mathbb{P}}
+
+\newcommand{\Le}[1][]{L_{\ifthenelse{\equal{#1}{}}{\mathrm{e}}{\mathrm{e},#1}}}
+\newcommand{\Li}{L_\mathrm{i}}
+\newcommand{\Lr}{L_\mathrm{r}}
+\newcommand{\We}{W_\mathrm{e}}
+\newcommand{\bWe}{\boldsymbol{W}_\mathrm{e}}
+\newcommand{\Ae}{A_\mathrm{e}}
+\newcommand{\bAe}{\boldsymbol{A}_\mathrm{e}}
+
+\newcommand{\bomi}{\bom_\mathrm{i}}
+\newcommand{\bomo}{\bom_\mathrm{o}}
+\newcommand{\bxo}{\bx_\mathrm{o}}
+\newcommand{\bsdf}{f_\mathrm{s}}
+
+\newcommand{\sigS}{\sigma_\mathrm{s}}
+\newcommand{\sigA}{\sigma_\mathrm{a}}
+\newcommand{\sigT}{\sigma_\mathrm{t}}
+\newcommand{\phase}{f_\mathrm{p}}
+\newcommand{\cS}{C_\mathrm{s}}
+\newcommand{\cA}{C_\mathrm{a}}
+\newcommand{\cT}{C_\mathrm{t}}
+
+\newcommand{\dtheta}{\dir{\boldsymbol\theta}}
+\newcommand{\dphi}{\dir{\boldsymbol\dphi}}
+
+\newcommand{\newdef}[2]{%
+    \hypertarget{label:def:#1}{\textbf{#2}}%
+}
+
+\newcommand{\refdef}[2]{%
+    %\hyperlink{label:def:#1}{\textcolor{ACMPurple}{#2}}%
+    \hyperlink{label:def:#1}{\textcolor{gray}{#2}}%
+}
+
+\newcommand{\gy}[1]{\textcolor{red}{[\textbf{Yu:} {\em #1}]}}
+\newcommand{\sz}[1]{\textcolor{blue}{[\textbf{SZ:} {\em #1}]}}
+
+\newcommand{\AJ}[1]{\textcolor{green}{[\textbf{AJ:} {\em #1}]}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EM-Based scattering macros (symbols now follow [Mischenko 2002], can
+% be changed to something more common in graphics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\dir}[1]{\mathbf{\hat{#1}}}
+
+\newcommand{\px}{\mathbf{r}}
+\newcommand{\dpx}{\dir{r}}
+\newcommand{\tpx}{r}
+\newcommand{\Px}{\mathbf{R}}
+\newcommand{\dPx}{\dir{R}}
+\newcommand{\tPx}{R}
+
+\newcommand{\radius}{a}
+
+\newcommand\approxwhen[1]{\mathrel{\stackrel{\makebox[0pt]{\mbox{\tiny{#1}}}}{\approx}}}
+
+\newcommand{\dw}{\dir{n}}
+\newcommand{\dwi}{\dw^{\text{inc}}}
+\newcommand{\dws}{\dw^{\text{sca}}}
+
+\newcommand{\dwpc}{\dir{\mathrm\phi}}
+\newcommand{\dwsc}{\dir{\mathrm\theta}}
+
+\newcommand{\diff}[1]{\,\text{d}#1}
+\newcommand{\img}{\text{i}}
+
+\newcommand{\Vint}{{V_{\text{int}}}}
+\newcommand{\Vext}{{V_{\text{ext}}}}
+
+\newcommand{\Nnear}{{N_{\text{near}}}}
+\newcommand{\Nfar}{{N_{\text{far}}}}
+\newcommand{\Ncls}{{N^\text{cls}}}
+
+\newcommand{\sFreq}{\omega}
+\newcommand{\sPermittivity}{\varepsilon}
+\newcommand{\sPermeability}{\mu}
+\newcommand{\sIOR}{m}
+
+\newcommand{\E}{\mathrm{e}}
+\newcommand{\Curl}{\nabla\times}
+\newcommand{\Complex}{\mathbb{C}}
+
+\newcommand{\Sphere}{\mathcal{S}^2}
+
+\newcommand{\EField}{\mathbf{E}}
+\newcommand{\ScaEField}{\EField^\text{sca}}
+\newcommand{\IncEField}{\EField^\text{inc}}
+\newcommand{\ExcEField}{\EField^\text{exc}}
+
+\newcommand{\EFields}{\EField_\theta}
+\newcommand{\EFieldp}{\EField_\phi}
+\newcommand{\MField}{\mathbf{H}}
+
+\newcommand{\sStokes}{\boldsymbol{I}}
+\newcommand{\sJones}{\boldsymbol{J}}
+
+\newcommand{\EV}[1]{{\langle #1 \rangle}}
+
+\newcommand{\Pprops}{\xi}
+
+\newcommand{\dyad}[1]{\accentset{\Longleftrightarrow}{#1}}
+\newcommand{\sGreen}{\dyad{G}}
+\newcommand{\sGreenProp}{g}
+\newcommand{\sIdDyad}{\dyad{I}}
+\newcommand{\ScaDyad}{\dyad{A}}
+
+\newcommand{\ScaMatrix}{\boldsymbol{S}}
+\newcommand{\PhaseMatrix}{\boldsymbol{Z}^{\sJones}}
+\newcommand{\ExtMatrix}{\boldsymbol{K}^{\sJones}}
+
+\newcommand{\Eq}[1]{Equation~\eqref{#1}}
+\newcommand{\Eqs}[2]{Equations~\eqref{#1} and \eqref{#2}}
+\newcommand{\Eqss}[3]{Equations~\eqref{#1}, \eqref{#2} and \eqref{#3}}
+\newcommand{\EqRange}[2]{Equations~\eqref{#1}-\eqref{#2}}
+
+\newcommand{\Cls}{C}
+\newcommand{\UG}{\dyad{M}}
+\newcommand{\TG}{\dyad{M}^T}
+
+\graphicspath{{img/}}
