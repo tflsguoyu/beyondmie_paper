@@ -1,11 +1,90 @@
-\documentclass[acmtog,review,screen,anonymous,balance=false]{acmart}
+\newif\ifpaperdraft
+%\paperdrafttrue
+\paperdraftfalse
+%
+\documentclass[acmtog,screen,balance=false]{acmart}
 \acmSubmissionID{329}
 
 %\usepackage{booktabs} % For formal tables
+\acmJournal{TOG}
+\acmVolume{40}
+\acmNumber{6}
+\acmArticle{285}
+\acmYear{2021}
+\acmMonth{12}
+\acmDOI{10.1145/3478513.3480543}
+
+% Copyright
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+\ifpaperdraft
+    \settopmatter{printacmref=false} % Removes citation information below abstract
+    \renewcommand\footnotetextcopyrightpermission[1]{} % Removes footnote with conference information in first column
+\fi
 
 % TOG prefers author-name bib system with square brackets
 \citestyle{acmauthoryear}
-%\setcitestyle{nosort,square} % nosort to allow for manual chronological ordering
+\setcitestyle{nosort,square} % nosort to allow for manual chronological ordering
+
+% Paper title
+\title{Beyond Mie Theory: Systematic Computation of Bulk Scattering Parameters based on Microphysical Wave Optics}
+
+% Authors
+\ifpaperdraft
+	\author{Author 1}
+	\email{Email 1}
+	\affiliation{%
+		\institution{Affiliation 1}%
+		\country{Country 1}
+	}
+	
+	\author{Author 2}
+	\email{Email 2}
+	\affiliation{%
+		\institution{Affiliation 2}%
+		\country{Country 2}
+	}
+	
+	\author{Author 3}
+	\email{Email 3}
+	\affiliation{%
+		\institution{Affiliation 3}%
+		\country{Country 3}
+	}
+	
+	% This command defines the author string for running heads.
+	\renewcommand{\shortauthors}{Author 1, Author 2, and Author 3}
+\else
+	\author{Yu Guo}
+	\email{guo.yu@uci.edu}
+	\affiliation{%
+		\institution{University of California, Irvine}%
+		\country{USA}
+	}
+	
+	\author{Adrian Jarabo}
+	\email{ajarabo@unizar.es}
+	\affiliation{%
+		\institution{Universidad de Zaragoza - I3A}%
+		\country{Spain}
+	}
+
+	\author{Shuang Zhao}
+	\email{shz@ics.uci.edu}
+	\affiliation{%
+		\institution{University of California, Irvine}%
+		\country{USA}
+	}
+	
+	% This command defines the author string for running heads.
+	\renewcommand{\shortauthors}{Guo, Jarabo, and Zhao}
+\fi
 
 \usepackage[ruled]{algorithm2e} % For algorithms
 \renewcommand{\algorithmcfname}{ALGORITHM}
@@ -13,29 +92,6 @@
 \SetAlCapFnt{\small}
 \SetAlCapNameFnt{\small}
 \SetAlCapHSkip{0pt}
-
-% Metadata Information
-\acmJournal{TOG}
-%\acmVolume{38}
-%\acmNumber{4}
-%\acmArticle{39}
-%\acmYear{2019}
-%\acmMonth{7}
-
-% Copyright
-%\setcopyright{acmcopyright}
-%\setcopyright{acmlicensed}
-%\setcopyright{rightsretained}
-%\setcopyright{usgov}
-%\setcopyright{usgovmixed}
-%\setcopyright{cagov}
-%\setcopyright{cagovmixed}
-
-% DOI
-%\acmDOI{0000001.0000001_2}
-
-\settopmatter{printacmref=false} % Removes citation information below abstract
-\renewcommand\footnotetextcopyrightpermission[1]{} % Removes footnote with conference information in first column
 
 \usepackage{ifthen}
 \usepackage{mathtools}
@@ -48,17 +104,15 @@
 \usepackage{accents}
 \usepackage{enumitem}
 \usepackage{overpic}
+\usepackage{empheq}
+
 \setlist[itemize]{parsep=0pt,partopsep=0pt,leftmargin=*,itemsep=5pt}
 \setlist[enumerate]{parsep=0pt,partopsep=0pt,leftmargin=*,itemsep=5pt}
 
-\input{tex/macros}
+\input{macros}
 
 \begin{document}
-	\title{Beyond Mie Theory: Systematic Computation of Bulk Scattering Parameters based on Microphysical Wave Optics}
-	% \author{Shuang Zhao}
-	% \affiliation{\institution{University of California, Irvine}}
-	%
-    \input{tex/abstract}
+    \input{abstract}
     %
 	\begin{CCSXML}
 		<ccs2012>
@@ -71,19 +125,24 @@
 	\end{CCSXML}
 	\ccsdesc[500]{Computing methodologies~Rendering}
 	%
-	\keywords{Radiative transfer, bulk scattering parameters, wave optics}
+ 	% \keywords{Radiative transfer, bulk scattering parameters, wave optics}
     %
-    \input{tex/fig/teaser}
+    \input{teaser}
     \maketitle
     %
-    \input{tex/intro}
-    \input{tex/prior}
-    \input{tex/prelim}
-    \input{tex/ours_clusters}
-    \input{tex/ours}
-    \input{tex/results}
-    \input{tex/conclusion}
+    \input{intro}
+    \input{prior}
+    \input{prelim}
+    \input{ours_clusters}
+    \input{ours}
+    \input{results}
+    \input{conclusion}
+    \input{ack}
     %
     \bibliographystyle{ACM-Reference-Format}
     \bibliography{references}
+    %
+    \clearpage
+    \appendix
+    \input{appendix}
 \end{document}
