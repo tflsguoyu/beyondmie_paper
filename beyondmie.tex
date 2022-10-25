@@ -1,135 +1,61 @@
-\newif\ifpaperdraft
-%\paperdrafttrue
-\paperdraftfalse
-%
-\documentclass[acmtog,screen,balance=false]{acmart}
-\acmSubmissionID{329}
+\documentclass[acmtog]{acmart}
 
-%\usepackage{booktabs} % For formal tables
 \acmJournal{TOG}
+\acmYear{2021}
+\acmMonth{12}
 \acmVolume{40}
 \acmNumber{6}
 \acmArticle{285}
-\acmYear{2021}
-\acmMonth{12}
+\acmSubmissionID{329}
 \acmDOI{10.1145/3478513.3480543}
-
-% Copyright
-%\setcopyright{acmcopyright}
-%\setcopyright{acmlicensed}
-\setcopyright{rightsretained}
-%\setcopyright{usgov}
-%\setcopyright{usgovmixed}
-%\setcopyright{cagov}
-%\setcopyright{cagovmixed}
-
-\ifpaperdraft
-    \settopmatter{printacmref=false} % Removes citation information below abstract
-    \renewcommand\footnotetextcopyrightpermission[1]{} % Removes footnote with conference information in first column
-\fi
-
-% TOG prefers author-name bib system with square brackets
+\acmPrice{15.00}
 \citestyle{acmauthoryear}
-\setcitestyle{nosort,square} % nosort to allow for manual chronological ordering
+\setcopyright{rightsretained}
 
-% Paper title
 \title{Beyond Mie Theory: Systematic Computation of Bulk Scattering Parameters based on Microphysical Wave Optics}
 
-% Authors
-\ifpaperdraft
-	\author{Author 1}
-	\email{Email 1}
-	\affiliation{%
-		\institution{Affiliation 1}%
-		\country{Country 1}
-	}
-	
-	\author{Author 2}
-	\email{Email 2}
-	\affiliation{%
-		\institution{Affiliation 2}%
-		\country{Country 2}
-	}
-	
-	\author{Author 3}
-	\email{Email 3}
-	\affiliation{%
-		\institution{Affiliation 3}%
-		\country{Country 3}
-	}
-	
-	% This command defines the author string for running heads.
-	\renewcommand{\shortauthors}{Author 1, Author 2, and Author 3}
-\else
-	\author{Yu Guo}
-	\email{guo.yu@uci.edu}
-	\affiliation{%
-		\institution{University of California, Irvine}%
-		\country{USA}
-	}
-	
-	\author{Adrian Jarabo}
-	\email{ajarabo@unizar.es}
-	\affiliation{%
-		\institution{Universidad de Zaragoza - I3A}%
-		\country{Spain}
-	}
+\author{Yu Guo}
+\affiliation{
+	\institution{University of California, Irvine}
+	\country{USA}}
+\email{guo.yu@uci.edu}
 
-	\author{Shuang Zhao}
-	\email{shz@ics.uci.edu}
-	\affiliation{%
-		\institution{University of California, Irvine}%
-		\country{USA}
-	}
-	
-	% This command defines the author string for running heads.
-	\renewcommand{\shortauthors}{Guo, Jarabo, and Zhao}
-\fi
+\author{Adrian Jarabo}
+\affiliation{
+	\institution{Universidad de Zaragoza - I3A}
+	\country{Spain}}
+\email{ajarabo@unizar.es}
 
-\usepackage[ruled]{algorithm2e} % For algorithms
-\renewcommand{\algorithmcfname}{ALGORITHM}
-\SetAlFnt{\small}
-\SetAlCapFnt{\small}
-\SetAlCapNameFnt{\small}
-\SetAlCapHSkip{0pt}
+\author{Shuang Zhao}
+\affiliation{
+	\institution{University of California, Irvine}
+	\country{USA}}
+\email{shz@ics.uci.edu}
 
-\usepackage{ifthen}
-\usepackage{mathtools}
-% \usepackage[usenames,dvipsnames]{xcolor}
-% \usepackage{multirow,pbox}
-\usepackage{multirow}
-\usepackage{nicefrac}
-\usepackage[many]{tcolorbox}
-\usepackage{comment,xspace}
-\usepackage{accents}
-\usepackage{enumitem}
-\usepackage{overpic}
-\usepackage{empheq}
-
-\setlist[itemize]{parsep=0pt,partopsep=0pt,leftmargin=*,itemsep=5pt}
-\setlist[enumerate]{parsep=0pt,partopsep=0pt,leftmargin=*,itemsep=5pt}
+\renewcommand{\shortauthors}{Guo, Jarabo, and Zhao}
 
 \input{macros}
 
 \begin{document}
+    \input{teaser}
     \input{abstract}
-    %
+
 	\begin{CCSXML}
 		<ccs2012>
-		<concept>
-		<concept_id>10010147.10010371.10010372</concept_id>
-		<concept_desc>Computing methodologies~Rendering</concept_desc>
-		<concept_significance>500</concept_significance>
-		</concept>
+			<concept>
+				<concept_id>10010147.10010371.10010372</concept_id>
+				<concept_desc>Computing methodologies~Rendering</concept_desc>
+				<concept_significance>500</concept_significance>
+			</concept>
 		</ccs2012>
 	\end{CCSXML}
+
 	\ccsdesc[500]{Computing methodologies~Rendering}
-	%
- 	% \keywords{Radiative transfer, bulk scattering parameters, wave optics}
-    %
-    \input{teaser}
+
+ 	\keywords{Radiative transfer, bulk scattering parameters, wave optics}
+    
     \maketitle
-    %
+    
     \input{intro}
     \input{prior}
     \input{prelim}
@@ -138,11 +64,12 @@
     \input{results}
     \input{conclusion}
     \input{ack}
-    %
+
     \bibliographystyle{ACM-Reference-Format}
     \bibliography{references}
-    %
+
     \clearpage
     \appendix
     \input{appendix}
+
 \end{document}

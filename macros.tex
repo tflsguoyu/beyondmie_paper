@@ -1,13 +1,31 @@
+\usepackage[ruled]{algorithm2e} % For algorithms
+\renewcommand{\algorithmcfname}{ALGORITHM}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
+\SetAlCapHSkip{0pt}
+
+\usepackage{ifthen}
+\usepackage{mathtools}
+% \usepackage[usenames,dvipsnames]{xcolor}
+% \usepackage{multirow,pbox}
+\usepackage{multirow}
+\usepackage{nicefrac}
+\usepackage[many]{tcolorbox}
+\usepackage{comment,xspace}
+\usepackage{accents}
+\usepackage{enumitem}
+\usepackage{overpic}
+\usepackage{empheq}
+
+\setlist[itemize]{parsep=0pt,partopsep=0pt,leftmargin=*,itemsep=5pt}
+\setlist[enumerate]{parsep=0pt,partopsep=0pt,leftmargin=*,itemsep=5pt}
+
 \newlength{\resLen}
 \newlength{\resLenTwo}
 \newlength{\raiseLen}
 
-\newcommand{\rev}[1]{%
-    \begingroup
-        \ifpaperdraft\color{blue}\fi%
-        #1
-    \endgroup
-}
+\newcommand{\rev}[1]{#1}
 
 %%%%%%%%%%%%%%%%%%%%
 % Marcos for other symbols
