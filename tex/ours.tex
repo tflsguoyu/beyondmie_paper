@@ -1,0 +1,17 @@
+\section{Computing the Bulk Scattering Parameters}
+\label{sec:ours_numerical}
+%
+We now detail our numerical computations of the scattering dyad $\ScaDyad_\Cls(\dwi,\dws)$ of \Eq{eq:farscatdyadC}, \rev{which in turn determines the bulk scattering parameters following Equations~\eqref{eq:crosstcluster}--\eqref{eq:sigmascluster}. These bulk scattering parameters}can be directly used in any renderer supporting participating media~\cite{novak2018monte} \rev{using tabulated phase function and cross sections.}
+
+Computing $\ScaDyad_\Cls(\dwi,\dws)$ essentially boils down to solving the time-harmonic Maxwell equations for an incident unit-amplitude planar field with direction $\dwi$. While several different methods exist for that purpose (see \S 16 of~\cite{mishchenko2014electromagnetic} for an overview), we opt for the superposition T-matrix method~\cite{mackowski1996calculation} that has been demonstrated efficient for moderately large $\Ncls$, can handle scatterers with arbitrary geometry, and is based on the principles of the Foldy-Lax equations, making it particularly appealing for our work. 
+
+In practice, we use the open-source CUDA-based \texttt{CELES} solver \cite{egel2017celes}, which implements the superposition T-matrix method proposed by Mackowski and Mishchenko \shortcite{mackowski2011multiple} for spherical or randomly rotated particles.
+In our implementation, we focus on clusters of spherical particles.
+Since the Lorenz-Mie theory also assumes spherical particles, this allows us to directly compare our results with those computed using the Lorenz-Mie theory \rev{(see Figures~\ref{fig:mie} and \ref{fig:mie2}). Note that the T-matrix method does not introduce assumptions on the size of particles but, similar to Lorenz-Mie theory, larger particles result in more expensive computations. }
+
+To compute the average scattering dyad $\EV{\ScaDyad_\Cls(\dwi,\dws)}$, we average the scattered field of several random realizations of the clusters (each of which obtained by randomly sampling the position of the particles inside the cluster's bounding sphere).
+As we will demonstrate in \S\ref{sec:result}, we use a wide array of distributions including particles uniformly distributed over the volume of the cluster, positively-correlated particles following Shaw et al.~\shortcite{shaw2002super}, negatively-correlated particles using Poisson sampling of the sphere, and anisotropic distributions by uniformly sampling the particles on a oriented 2D disk.
+
+Lastly, we represent the resulting phase function as well as the extinction and scattering cross sections as tabulated (i.e., piecewise constant) functions that can be used for rendering.
+
+%\AJ{Maybe add some detail on the tabulation? How many angular bins do we use? How much in the case of anisotropic PFs?How much on the spectral domain?} \sz{Yes, we should provide some details here.}

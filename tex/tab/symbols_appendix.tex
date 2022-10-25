@@ -1,0 +1,122 @@
+\begin{table}[]
+\footnotesize
+\begin{tabular}{cl}
+\textbf{Symbol}   & \textbf{Meaning} \\ 
+\hline
+$\px\in\Real^3$ & Position \\
+$\dpx\in\Sphere$ & Direction to $\px$. \\
+$\tpx\in\Real$ & Distance. \\
+\hline
+$\sPermittivity(\px)$ & Permittivity \\
+$\sPermeability(\px)$ & Permeability \\
+$\sFreq$ & Wave angular frequency [1/s] \\
+$\lambda=2\pi\sFreq^{-1}$ & Wavelength [m] \\
+$k(\px)=\sFreq\sqrt{\sPermittivity(\px)\sPermeability(\px)}$ & Wavenumber at $\px$\\
+$\sIOR(\px)=k_2(\px)/k_1$ & Relative refractive index at $\px$ \\
+\hline
+$\MField(\px)$ & Magnetic field at $\px$ \\
+$\EField(\px)$   & Electric field at $\px$  \\
+$\IncEField(\px)$ & Incident electric field $\px$\\
+$\ScaEField(\px)$ & Scattered electric field at $\px$ \\ 
+$\EField_0$ & Amplitude of a planar electric field \\
+$\ScaEField_1(\dpx)$ & Far-field angular distribution of the scattered radiation  \\
+\hline
+$\sGreen$ & Free-space dyadic Green's function~\eqref{eq:greenfunc} \\
+$\dyad{T}$ & Dyad transition operator~\eqref{eq:}\\
+$\sGreenProp(\dw,\px)$ & Planar field scalar propagator along direction $\dw$ on point $\px$ $\dw$~\eqref{eq:farincfieldcluster} \\
+
+\hline
+\hline
+$V_i$ & Volume suspended by particle/cluster $i$ \\
+$\Px_i\in\Real^3$ & Representative position of particle/cluster $i$ \\
+$\dPx_{ij}\in\Sphere$ & Direction from $\Px_j$ to $\Px_i$\\
+$\tPx_{ij}\in\Real$ & Distance from $\Px_j$ to $\Px_i$\\
+\hline
+$\EField_i(\px)$ & Exciting field in $\px\in V_i$ \\
+$\ExcEField_{ij}(\px)$ & Partial exciting field in particle $\px\in V_i$ from particle $j$ \\
+
+\hline
+$\ScaDyad_i^\text{near}(\dwi,\px)$ & Near-field scattering dyad of particle/cluster $i$~\eqref{eq:scatdyad_near}. \\
+$\ScaDyad_i(\dwi,\dws)$ & Far-field scattering dyad of particle/cluster $i$~\eqref{eq:scatdyad_far}. \\
+
+\hline
+
+\end{tabular}
+\end{table}
+
+
+
+\begin{table}[]
+\begin{tabular}{cl}
+\small
+\textbf{Symbol}   & \textbf{Meaning} \\ 
+\hline
+$\px\in\Real^3$ & Position \\
+$\dpx\in\Sphere$ & Direction from the observation point $O$ to $\px$ \\
+$\tpx\in\Real$ & Distance from the observation point $O$ to $\px$\\
+$\dw\in\Sphere$ & Propagation direction \\
+\hline \\
+$\nabla.$  & Gradient operator \\
+$\nabla\cdot. $ & Divergence operator \\
+$\nabla\times. $ & Curl operator \\ 
+$. \otimes .$ & Dyad vector operator \\
+$\sIdDyad$ & Identity dyad \\
+$\img$ & $\sqrt{-1}$\\
+\hline
+$\sPermittivity(\px)$ & Permittivity \\
+$\sPermeability(\px)$ & Permeability \\
+$\sFreq$ & Wave angular frequency [1/s] \\
+$\lambda$ & Wavelength [m] \\
+$k(\px)=\sFreq\sqrt{\sPermittivity(\px)\sPermeability(\px)}=\frac{2\pi}{\lambda}\sqrt{\sPermittivity(\px)\sPermeability(\px)}$ & Wavenumber at $\px$\\
+$\sIOR(\px)=k_2(\px)/k_1$ & Relative refractive index at $\px$ \\
+
+
+\hline
+$\MField(\px)$ & Magnetic Field at $\px$ \\
+$\EField(\px) = \EFieldp(\px)+\EFields(\px)$   & Electric Field at $\px$  \\
+$\EFieldp$ & Parallel component of the E-Field \\
+$\EFields$ & Perpendicular component of the E-Field \\
+$\sStokes$ & Stokes vector of the E-Field \\
+$\sJones$ & Coherency column vector of the E-Field \\
+
+$\IncEField(\px)$ & Incident Field \\
+$\ScaEField(\px)$ & Scattered Field \\
+
+$\EField_i(\px)$ & Exciting Field in particle $i$ \\
+$\ExcEField_{ij}(\px)$ & Partial Exciting Field in particle $i$ for particle $j$ \\
+
+
+$\ScaEField_1(\dpx)$ & Far-field angular distribution of the scattered radiation  \\
+
+\hline
+$\sGreen$ & Free-space dyadic Green's function~\eqref{eq:greenfunc} \\
+$\dyad{T}$ & Dyad transition operator (Lippmann-Schwinger equation, Eq.13) \\
+$\sGreenProp(\dw,\px)$ & Planar field scalar propagator along direction $\dw$ on point $\px$ $\dw$~\eqref{eq:farincfieldcluster} \\
+\hline
+$\ScaDyad_i$ & Far-field scattering dyad of particle $i$~\eqref{eq:scatdyad_far}. \\
+$\ScaDyad_i^\text{near}$ & Near-field scattering dyad of particle $i$~\eqref{eq:scatdyad_near}. \\
+$\ScaMatrix(\dwi,\dws)$ & Scattering $2\times2$ matrix  \\
+$\PhaseMatrix(\dwi,\dws)$ & Coherency $4\times4$ phase matrix \\
+$\ExtMatrix$ & Coherency $4\times 4$ extinction matrix \\
+\end{tabular}
+\end{table}
+
+
+Assuming $\IncEField(\px)$ is a plane EM wave  $\IncEField(\px)=\IncEField_0 \exp(i\,k_1 \dwi\cdot \px)$, then the far-field angular distribution of EM radiation is 
+\begin{equation}
+\ScaEField_1(\dws) = \dyad{A}(\dws,\dwi) \cdot \IncEField_0
+\end{equation}
+with $\dyad{A}$ the scattering dyad relating incoming and outgoing fields. 
+
+\begin{equation}
+\ScaMatrix(\dwi,\dws) =\begin{vmatrix}
+S_{11} & S_{12}\\ 
+S_{21} & S_{22} 
+\end{vmatrix} 
+=\begin{vmatrix}
+\dwsc^{\text{sca}}\cdot\dyad{A}\cdot \dwsc^{\text{inc}} & \dwsc^{\text{sca}}\cdot\dyad{A}\cdot \dwpc^{\text{inc}} \\ 
+\dwpc^{\text{sca}}\cdot\dyad{A}\cdot \dwsc^{\text{inc}} & \dwpc^{\text{sca}}\cdot\dyad{A}\cdot \dwpc^{\text{inc}}
+\end{vmatrix} 
+\end{equation}
+
+
